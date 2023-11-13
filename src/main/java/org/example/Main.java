@@ -31,6 +31,7 @@ public class Main {
         System.out.println(Combination.isRoyalFlush(HandParser.getListCards("TH JH QH KH AH")));
         System.out.println(Combination.isKare(HandParser.getListCards("TH JH QH KH AH")));
 
+
         List<PokerHand> pokerHandList = new ArrayList<>();
         pokerHandList.add(pokerHandFlush);
         pokerHandList.add(pokerHandSRoyalFlush);

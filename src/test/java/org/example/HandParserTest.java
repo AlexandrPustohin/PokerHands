@@ -1,5 +1,9 @@
 package org.example;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,13 +17,26 @@ class HandParserTest {
         assertArrayEquals(handParser.getListCards("4d 6s kc 8H 3S").toArray(),getTestListCards().toArray());
     }
 
+    @Test
+    void throwIllegalArgumentExceptionTest(){
+        IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            HandParser.getListCards("4d 6s kc 8H");
+        });
+        Assertions.assertEquals("Invalid poker hand!", thrown.getMessage());
+    }
+
+    @Test
+    void noThrowIllegalArgumentExceptionTest(){
+            Assertions.assertDoesNotThrow(() -> HandParser.getListCards("4d 6s kc 8H 3S"));
+    }
+
     private List<Card> getTestListCards() {
         List<Card> list = new ArrayList<>();
-        list.add(new Card("4","D"));
-        list.add(new Card("6","S"));
-        list.add(new Card("K","C"));
-        list.add(new Card("8","H"));
-        list.add(new Card("3","S"));
+        list.add(CardParser.getCard("4d"));
+        list.add(CardParser.getCard("6S"));
+        list.add(CardParser.getCard("KC"));
+        list.add(CardParser.getCard("8H"));
+        list.add(CardParser.getCard("3S"));
         return list;
     }
 

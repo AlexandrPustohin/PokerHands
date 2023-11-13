@@ -6,17 +6,17 @@ public class CardParser {
     public static Card getCard(String card){
 
         String [] mCard = card.split("");
-        try {
-            String nominal = mCard[0].toUpperCase();
-            String suit = mCard[1].toUpperCase();
-            if (nominals.contains(nominal) && suits.contains(suit)) {
-                return new Card(nominal, suit);
-            } else {
-                throw new IllegalArgumentException("Invalid card!");
-            }
-        } catch (ArrayIndexOutOfBoundsException e){
-            throw new IllegalArgumentException("Invalid card in poker hand!");
-        }
 
+        String nominal = mCard[0].toUpperCase().trim();
+        String suit = mCard[1].toUpperCase().trim();
+        if ( !nominals.contains(nominal) && !suits.contains(suit)) {
+            throw new IllegalArgumentException("Invalid card!");
+        } else if(!suits.contains(suit)){
+            throw new IllegalArgumentException("Invalid suit card!");
+        } else if(!nominals.contains(nominal) ) {
+            throw new IllegalArgumentException("Invalid nominal card!");
+        } else {
+            return new Card(nominal, suit);
+        }
     }
 }
