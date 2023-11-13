@@ -1,5 +1,9 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         PokerHand pokerHandMainCard = new PokerHand("4d 6s kc 8H 3S");//старшая карта
@@ -12,7 +16,7 @@ public class Main {
         PokerHand pokerHandKare = new PokerHand("7C JC JD JS JH");//Каре
         PokerHand pokerHandStraightFlush = new PokerHand("7C 8C 9C TC JC");//Стрит-Флеш
         PokerHand pokerHandSRoyalFlush = new PokerHand("TH JH QH KH AH");//Флеш-Рояль
-
+/*
         System.out.println("Старшая карта: "+pokerHandMainCard.getRang());
         System.out.println("Одна пара: "+pokerHandP1.getRang());
         System.out.println("Две пары: "+pokerHandP2.getRang());
@@ -23,7 +27,23 @@ public class Main {
         System.out.println("Каре (сети пара): "+pokerHandKare.getRang());
         System.out.println("Стрит-Флеш (стрит и флеш): "+pokerHandStraightFlush.getRang());
         System.out.println("Флеш-Рояль (от 10 до туза одной масти): "+pokerHandSRoyalFlush.getRang());
+*/
+        System.out.println(Combination.isRoyalFlush(HandParser.getListCards("TH JH QH KH AH")));
+        System.out.println(Combination.isKare(HandParser.getListCards("TH JH QH KH AH")));
 
-        System.out.println(pokerHandSRoyalFlush.compareTo(pokerHandFullHouse));
+        List<PokerHand> pokerHandList = new ArrayList<>();
+        pokerHandList.add(pokerHandFlush);
+        pokerHandList.add(pokerHandSRoyalFlush);
+        pokerHandList.add(pokerHandFullHouse);
+        pokerHandList.add(pokerHandP2);
+        pokerHandList.add(pokerHandMainCard);
+        pokerHandList.add(pokerHandKare);
+        pokerHandList.add(pokerHandP1);
+        pokerHandList.add(pokerHandSet);
+        pokerHandList.add(pokerHandStraight);
+        pokerHandList.add(pokerHandStraightFlush);
+        Collections.sort(pokerHandList);
+        pokerHandList.forEach(System.out::println);
+
     }
 }

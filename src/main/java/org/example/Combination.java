@@ -21,7 +21,7 @@ public class Combination {
         if(isFullHouse(cardList)){//FullHouse
             return 6;
         }
-        if (isFlush(cardList) && !isStraight(cardList)){//Flush
+        if (isFlush(cardList)){//Flush
             return 5;
         }
         if (isStraight(cardList)){//Стрит
@@ -40,33 +40,26 @@ public class Combination {
         return rang;
     }
 
-    private static boolean isRoyalFlush(List<Card> cards) {
+    protected static boolean isRoyalFlush(List<Card> cards) {
     Collections.sort(cards);
     return isFlush(cards) && cards.get(0).getNominal().equals("T") && cards.get(4).getNominal().equals("A");
     }
 
-    private static boolean isStraightFlush(List<Card> cards) {
+    protected static boolean isStraightFlush(List<Card> cards) {
         return isFlush(cards) && isStraight(cards)? true:false;
     }
 
-    private static boolean isKare(List<Card> cards) {
+    protected static boolean isKare(List<Card> cards) {
         long count = cards.stream().map(c->c.getNominal())
                 .collect(Collectors.toMap(s -> s, s -> 1, Integer::sum))
                 .entrySet().stream().filter(k->k.getValue()==4).count();
         return count==1 ? true:false;
     }
 
-    private static boolean isFullHouse(List<Card> cardList) {
+    protected static boolean isFullHouse(List<Card> cardList) {
         return haveTreeCards(cardList) && (countPairs(cardList)==1);
     }
 
-    public static List<Card> getSortedBySuit(List<Card> cardList){
-        Comparator<Card> cardBySuit = Comparator.comparing(Card::getSuit);
-        List<Card> res = cardList.stream().sorted(cardBySuit).collect(Collectors.toList());
-        return res;
-    }
-
-    //количество пар
     protected static  long countPairs(List<Card> cards) {
         return cards.stream().map(c->c.getNominal())
                 .collect(Collectors.toMap(s -> s, s -> 1, Integer::sum))

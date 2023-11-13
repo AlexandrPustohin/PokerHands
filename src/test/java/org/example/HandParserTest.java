@@ -22,4 +22,5 @@ class HandParserTest {
         list.add(new Card("3","S"));
         return list;
     }
+
 }
